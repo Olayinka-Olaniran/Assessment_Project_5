@@ -1,0 +1,340 @@
+/* ==========================================================================
+   1. Global Reset & Base Layout
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #f4f6f8;
+    color: #333;
+    line-height: 1.5;
+    padding: 2rem 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+main {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Balanced spacing between the stacked main blocks */
+}
+
+h1, h2 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+}
+
+/* ==========================================================================
+   2. Uniform Structural Section Cards
+   ========================================================================== */
+#add-item-section, 
+#item-count-and-duplicate-display, 
+#shopping-list-display-section {
+    background: #ffffff;
+    padding: 2.25rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    width: 100%;
+}
+
+/* ==========================================================================
+   3. Input Form Controls (Add Item)
+   ========================================================================== */
+.input-field-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.input-field-wrap > div {
+    flex: 1;
+    min-width: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #4a5568;
+}
+
+input[type="name"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 0.65rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #fff;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input:focus, select:focus {
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
+}
+
+button {
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0.65rem 1.25rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+.add-item-button, #add-duplicate-button {
+    background-color: #3182ce;
+    color: white;
+}
+
+.add-item-button:hover, #add-duplicate-button:hover {
+    background-color: #2b6cb0;
+}
+
+/* ==========================================================================
+   4. Tracker Section (Dynamic h2 and 4 h4s)
+   ========================================================================== */
+#item-count-and-duplicate-display {
+    display: flex;
+    flex-direction: column;
+}
+
+#item-count-and-duplicate-display h2 {
+    font-size: 1.25rem;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+#item-count-and-duplicate-display-grid { 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1.25rem;
+}
+
+#item-count-and-duplicate-display h4 {
+    background: #f8fafc;
+    padding: 0.85rem;
+    border-radius: 6px;
+    border-left: 4px solid #4a5568;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #4a5568;
+}
+
+#item-count-and-duplicate-display h4:first-of-type {
+    border-left-color: #3182ce;
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   5. Shopping List Grid Data Table View
+   ========================================================================== */
+#dropdown {
+    margin-bottom: 1.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+#dropdown select {
+    max-width: 220px;
+}
+
+/* The primary outer layout block box mapping table dimensions */
+#shopping-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 1.75rem;
+    border: 1px solid #e2e8f0; 
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+/* --- THE TABLE CONTROLLERS --- */
+/* Master track spacing blueprint mapping out: | [] | Name | Category | Amount | */
+#header-row,
+.shopping-list-item {
+    display: grid;
+    grid-template-columns: 50px 2fr 1.5fr 1fr 0.5fr; 
+    align-items: center;
+    padding: 1rem 0.75rem;
+}
+
+/* Permanent Sticky Table Header Row Configuration */
+#header-row {
+    background-color: #f1f5f9; 
+    border-bottom: 2px solid #cbd5e1;
+}
+
+#header-row h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Forces Name title over text track column, keeping the 50px cell clear for data checkboxes */
+#header-row .item-name {
+    grid-column: 2;
+}
+
+/* Dynamic JS Generated Row Data Additions */
+.shopping-list-item {
+    padding: 0.5rem 0.5rem;
+    background-color: #ffffff;
+    transition: background-color 0.15s;
+    border-bottom: 1px solid #f1f5f9; 
+}
+
+.shopping-list-item:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+/* Zebra striping rows for perfect eye-line tracking across data spaces */
+.shopping-list-item:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+.shopping-list-item:hover {
+    background-color: #f1f5f9;
+}
+
+/* Form Checkbox and Custom Dynamic Text Cell Items */
+.shopping-list-item input[type="checkbox"] {
+    justify-self: center;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.shopping-list-item label {
+    font-weight: 500;
+    color: #1a202c;
+    cursor: pointer;
+    padding-right: 1rem;
+    text-transform: capitalize;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Center Column Category Display Node styling */
+.item-category {
+    justify-self: center;
+    color: #64748b;
+    font-size: 0.95rem;
+    text-transform: capitalize;
+}
+
+/* Right-aligned cell formatting anchoring total columns cleanly */
+.item-amount {
+    justify-self: center;
+    padding-right: 1.5rem;
+    font-weight: 600;
+    color: #334155;
+}
+.item-actions {
+    justify-self: end;
+    padding-right: 1.5rem;
+    font-weight: 600;
+    color: #334155;
+}
+
+/* Header Text Amount element overrides so label aligns precisely above data rows */
+#header-row .item-amount {
+    font-weight: 700;
+    color: #475569;
+}
+
+/* Action Control Command Buttons Footer */
+#delete-selected-list, #cancel-update-button, #cancel-duplicate-button {
+    background-color: #e53e3e;
+    color: white;
+    margin-right: 0.5rem;
+    margin-bottom: 0;
+}
+
+#delete-selected-list:hover, #cancel-update-button:hover, #cancel-duplicate-button:hover {
+    background-color: #c53030;
+}
+
+#clear-shopping-list {
+    background-color: #edf2f7;
+    color: #4a5568;
+}
+
+#clear-shopping-list:hover {
+    background-color: #e2e8f0;
+}
+
+.hidden {
+    display: none;
+}
+
+#duplicate-dialog-box {
+    /* 1. Break out of default browser stacking rules */
+    position: fixed;
+    margin: 0;
+    padding: 10px;
+    /* 2. Push to coordinates (30% down from top, 50% from left) */
+    justify-content: center;
+    top: 30%;
+    left: 30%;}
+
+.duplicate-item-dialog-btns {
+    justify-self: center;
+    margin-top: 0.7rem;
+}
+
+.edit-item-button{
+    margin:0%;
+}
+
+#update-item-dialog {
+    /* 1. Break out of default browser stacking rules */
+    position: fixed;
+    margin: 0;
+    padding: 10px;
+    /* 2. Push to coordinates (30% down from top, 50% from left) */
+    justify-self: center;
+    justify-content: center;
+    top: 30%;
+}
+
+#update-list-item-dialog-buttons, #shopping-list-buttons {
+    justify-self: right;
+}
+/* ==========================================================================
+   6. Clean Responsive Adaptation Breakdown
+   ========================================================================== */
+@media (max-width: 650px) {
+    #header-row,
+    .shopping-list-item {
+        grid-template-columns: 50px 1fr 80px; 
+    }
+    .item-category {
+        display: none; 
+    }
+}

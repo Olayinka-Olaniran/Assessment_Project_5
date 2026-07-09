@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.0">
+    <title>Shopping List Manager</title>
+    <link rel="stylesheet" href="WeeklyAssessment5.css">
+</head>
+
+<body>
+    <main>
+        <section id="add-item-section" >
+        <h1>Shopping List Manager</h1>
+        <form onsubmit="captureDuplicateItem(event)">
+            <div id="input-field-wrap" class="input-field-wrap">
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="name" id="name" class="name" required>
+                </div>
+                <div>
+                    <label for="category">Category:</label>
+                <select id="category-dropdown" class="category-dropdown" name="options">
+                    <option value="food" selected>Food</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="clothes">Clothes</option>
+                </select>
+                </div>
+                <div>
+                    <label for="amount">Amount:</label>
+                    <input type="number" id="amount" class="amount" min="1" required>
+                </div>
+            </div>
+
+            <div>
+                <button type="submit" id="add-item-button" class="add-item-button">Add Item</button>
+            </div>
+
+            </form>
+        </section>
+
+        <section id="item-count-and-duplicate-display">
+            
+        </section>
+
+
+        <section id="shopping-list-display-section">
+            <h2 class="shopping-list">Shopping List</h2>
+            <div id="dropdown">
+                <label for="category-dropdown">Select a category:</label>
+                <select id="category-dropdown" name="options">
+                    <option value="all" selected>All</option>
+                    <option value="food">Food</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="clothes">Clothes</option>
+                </select>
+            </div>
+                <div id = "header-row" class="list-row"> 
+                    <h3 class="item-name">Name</h3>
+                    <h3 class="item-category">Category</h3>
+                    <h3 class="item-amount">Amount</h3>
+                </div>
+            <div id="shopping-list">
+            </div>
+
+            <div id="update-list-item-dialog">
+                <dialog id="update-item-dialog">
+                    <form onsubmit="updateListItem(event)">
+                    <div class="input-field-wrap">
+                        <div>
+                            <label for="name">Name:</label>
+                            <input type="name" id="update-name" class="name" required>
+                        </div>
+                        <div>
+                            <label for="category">Category:</label>
+                        <select id="update-category" class="category-dropdown" name="options">
+                            <option value="food" selected>Food</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="clothes">Clothes</option>
+                        </select>
+                        </div>
+                        <div>
+                            <label for="amount">Amount:</label>
+                            <input type="number" id="update-amount" class="amount" min="1" required>
+                        </div>
+                    </div>
+
+                    <div id="update-list-item-dialog-buttons">
+                        <button type="submit" class="add-item-button">Update Item</button>
+                        <button type="button" id="cancel-update-button" onclick="this.closest('dialog').close()">Cancel</button>
+                    </div>
+
+                    </form>
+                </dialog>
+            </div>
+
+            <div id="shopping-list-buttons">
+                <button type="button" id="delete-selected-list">Delete</button>
+                <button type="button" id="clear-shopping-list">Clear List</button>
+            </div>
+        </section>
+    </main>
+    
+    <script src="WeeklyAssessment5.js"></script>
+</body>
+
+</html>
